@@ -1,0 +1,762 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GPIHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="InsMedicalAppointment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatorID" Type="int" Nullable="false" />
+          <Property Name="ApproverID" Type="int" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="N" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ManualN" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BranchID" Type="int" Nullable="false" />
+          <Property Name="InsurantPolicyID" Type="int" Nullable="false" />
+          <Property Name="InsurantIsInsuredInOtherCompany" Type="bit" />
+          <Property Name="InsurantOtherInsuranceCompany" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PatientPolicyID" Type="int" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="Patient2InsurantRelationID" Type="int" Nullable="false" />
+          <Property Name="Patient2InsurantRelation" Type="nvarchar" MaxLength="100" />
+          <Property Name="PatientIsInsuredInOtherCompany" Type="bit" />
+          <Property Name="PatientOtherInsuranceCompany" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeclaratorID" Type="int" Nullable="false" />
+          <Property Name="Declarator2PatientRelationID" Type="int" Nullable="false" />
+          <Property Name="Declarator2PatientRelation" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="Cursus" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="ICD10" Type="int" />
+          <Property Name="FullDiagnosisID" Type="int" />
+          <Property Name="Diagnosis" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="IlnessDescription" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Result" Type="nvarchar" MaxLength="3000" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="ExclusionComment" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ProviderID" Type="int" />
+        </EntityType>
+        <EntityType Name="InsMedicalAppointmentService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppointmentID" Type="int" Nullable="false" />
+          <Property Name="PrescriptionFormN" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PrescriptionFormNByHand" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ProviderID" Type="int" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="ServiceID" Type="int" />
+          <Property Name="NumberOfUnits" Type="int" Nullable="false" />
+          <Property Name="Service" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Coverage" Type="money" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="RequestedAmount" Type="money" Nullable="false" />
+          <Property Name="ServiceStart" Type="datetime" />
+          <Property Name="ServiceEnd" Type="datetime" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="AppointmentResult" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="NonProviderAppointment" Type="bit" />
+          <Property Name="Discount" Type="money" />
+          <Property Name="PrintFormTypeID" Type="int" />
+          <Property Name="NCSPID" Type="int" />
+          <Property Name="LabTestID" Type="int" />
+          <Property Name="NCSPID2" Type="int" />
+          <Property Name="LabTestID2" Type="int" />
+          <Property Name="PrintCount" Type="int" Nullable="false" />
+          <Property Name="MedicineID" Type="int" />
+          <Property Name="AppointedASpecialist" Type="bit" />
+          <Property Name="MedicinePriority" Type="int" />
+          <Property Name="OriginalPrice" Type="money" />
+          <Property Name="PaidByOther" Type="money" />
+          <Property Name="Deducted" Type="money" />
+          <Property Name="StateLimitExceeded" Type="bit" />
+          <Property Name="IsNotDefaultCoverage" Type="bit" />
+          <Property Name="MedicalPlanCoverageID" Type="int" />
+        </EntityType>
+        <EntityType Name="InsMedicalCaseEx">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatorID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="CoordinatorID" Type="int" Nullable="false" />
+          <Property Name="DeclarationID" Type="int" />
+          <Property Name="BranchID" Type="int" Nullable="false" />
+          <Property Name="N" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NotificationDate" Type="datetime" Nullable="false" />
+          <Property Name="DeclaratorID" Type="int" Nullable="false" />
+          <Property Name="InsurantPolicyID" Type="int" Nullable="false" />
+          <Property Name="PatientPolicyID" Type="int" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="PaymentReceiverID" Type="int" Nullable="false" />
+          <Property Name="PaymentTypeID" Type="int" Nullable="false" />
+          <Property Name="Invoice" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PatientIsInsuredInOtherCompany" Type="bit" />
+          <Property Name="PatientOtherInsuranceCompany" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OtherInsuranceTypeID" Type="int" />
+          <Property Name="ICD10" Type="int" />
+          <Property Name="FullDiagnosisID" Type="int" />
+          <Property Name="Diagnosis" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PaymentReceiverBankAccountID" Type="int" />
+          <Property Name="InvoiceID" Type="int" />
+          <Property Name="ICD10_2" Type="int" />
+          <Property Name="ResponsiblePersonID" Type="int" />
+          <Property Name="ResponsiblePersonChangeDate" Type="datetime" />
+          <Property Name="GuaranteeLetterDeclarationID" Type="int" />
+          <Property Name="VersionTypeID" Type="int" Nullable="false" />
+          <Property Name="OriginalCaseID" Type="int" />
+          <Property Name="UID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InsMedicalCaseServiceEx">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseID" Type="int" Nullable="false" />
+          <Property Name="CreatorID" Type="int" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="ServiceStart" Type="datetime" Nullable="false" />
+          <Property Name="ServiceEnd" Type="datetime" Nullable="false" />
+          <Property Name="N" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="ProviderID" Type="int" />
+          <Property Name="ServiceID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Coverage" Type="money" Nullable="false" />
+          <Property Name="RealPrice" Type="money" Nullable="false" />
+          <Property Name="RealCustomerPaid" Type="money" Nullable="false" />
+          <Property Name="OtherInsurantPaid" Type="money" Nullable="false" />
+          <Property Name="DeductedAmount" Type="money" Nullable="false" />
+          <Property Name="DeductionTypeID" Type="int" />
+          <Property Name="OurDiscountReal" Type="money" Nullable="false" />
+          <Property Name="ToBePaidReal" Type="money" Nullable="false" />
+          <Property Name="ToBePaidReal2" Type="money" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ClaimManagerID" Type="int" />
+          <Property Name="ClaimManagerApproveDate" Type="datetime" />
+          <Property Name="HeadApproverID" Type="int" />
+          <Property Name="HeadApproveDate" Type="datetime" />
+          <Property Name="AccountantID" Type="int" />
+          <Property Name="AccountantApproveDate" Type="datetime" />
+          <Property Name="ExclusionComment" Type="nvarchar" MaxLength="500" />
+          <Property Name="PrescriptionFormN" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppointmentServiceID" Type="int" />
+          <Property Name="GuaranteeLetterItemID" Type="int" />
+          <Property Name="ActID" Type="int" />
+          <Property Name="DeclaredEstimatedLoss" Type="money" />
+          <Property Name="NCSPID" Type="int" />
+          <Property Name="LabTestID" Type="int" />
+          <Property Name="NCSPID2" Type="int" />
+          <Property Name="LabTestID2" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="DeclarationServiceID" Type="int" />
+          <Property Name="WasCreatedFromDeclaration" Type="bit" />
+          <Property Name="ProviderName" Type="nvarchar(max)" />
+          <Property Name="BedDays" Type="int" />
+          <Property Name="ToothNumber" Type="int" />
+          <Property Name="GuaranteeLetterDeclarationServiceID" Type="int" />
+          <Property Name="OriginalPrice" Type="money" />
+          <Property Name="MedicalClaimOperationID" Type="int" />
+          <Property Name="LastModifierID" Type="int" />
+          <Property Name="OriginalCaseServiceID" Type="int" />
+          <Property Name="StateLimitExceeded" Type="bit" />
+          <Property Name="IsNotDefaultCoverage" Type="bit" />
+          <Property Name="MedicalPlanCoverageID" Type="int" />
+        </EntityType>
+        <EntityType Name="InsMedicalProviderInvoice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatorID" Type="int" Nullable="false" />
+          <Property Name="ApproverID" Type="int" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="ProviderID" Type="int" Nullable="false" />
+          <Property Name="N" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+          <Property Name="ServicePeriod" Type="int" />
+          <Property Name="OperatorID" Type="int" />
+          <Property Name="OperatorChangeDate" Type="datetime" />
+          <Property Name="ApproveDate" Type="datetime" />
+          <Property Name="ProgrammeTypeID" Type="int" />
+          <Property Name="InvoiceStatusID" Type="int" />
+          <Property Name="ServicePeriodYear" Type="int" />
+        </EntityType>
+        <Association Name="FK_InsMedicalAppointment_InsMedicalAppointmentService_AppointmentID">
+          <End Role="InsMedicalAppointment" Type="Self.InsMedicalAppointment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InsMedicalAppointmentService" Type="Self.InsMedicalAppointmentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsMedicalAppointment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InsMedicalAppointmentService">
+              <PropertyRef Name="AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsMedicalCaseEx_InsMedicalProviderInvoice_InvoiceID">
+          <End Role="InsMedicalProviderInvoice" Type="Self.InsMedicalProviderInvoice" Multiplicity="0..1" />
+          <End Role="InsMedicalCaseEx" Type="Self.InsMedicalCaseEx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsMedicalProviderInvoice">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InsMedicalCaseEx">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsMedicalCaseServiceEx_AppointmentServiceID">
+          <End Role="InsMedicalAppointmentService" Type="Self.InsMedicalAppointmentService" Multiplicity="0..1" />
+          <End Role="InsMedicalCaseServiceEx" Type="Self.InsMedicalCaseServiceEx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsMedicalAppointmentService">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InsMedicalCaseServiceEx">
+              <PropertyRef Name="AppointmentServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsMedicalCaseServiceEx_InsMedicalCaseEx_CaseID">
+          <End Role="InsMedicalCaseEx" Type="Self.InsMedicalCaseEx" Multiplicity="1" />
+          <End Role="InsMedicalCaseServiceEx" Type="Self.InsMedicalCaseServiceEx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsMedicalCaseEx">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InsMedicalCaseServiceEx">
+              <PropertyRef Name="CaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GPIHModelStoreContainer">
+          <EntitySet Name="InsMedicalAppointment" EntityType="Self.InsMedicalAppointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsMedicalAppointmentService" EntityType="Self.InsMedicalAppointmentService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsMedicalCaseEx" EntityType="Self.InsMedicalCaseEx" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsMedicalCaseServiceEx" EntityType="Self.InsMedicalCaseServiceEx" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsMedicalProviderInvoice" EntityType="Self.InsMedicalProviderInvoice" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_InsMedicalAppointment_InsMedicalAppointmentService_AppointmentID" Association="Self.FK_InsMedicalAppointment_InsMedicalAppointmentService_AppointmentID">
+            <End Role="InsMedicalAppointment" EntitySet="InsMedicalAppointment" />
+            <End Role="InsMedicalAppointmentService" EntitySet="InsMedicalAppointmentService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsMedicalCaseEx_InsMedicalProviderInvoice_InvoiceID" Association="Self.FK_InsMedicalCaseEx_InsMedicalProviderInvoice_InvoiceID">
+            <End Role="InsMedicalProviderInvoice" EntitySet="InsMedicalProviderInvoice" />
+            <End Role="InsMedicalCaseEx" EntitySet="InsMedicalCaseEx" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsMedicalCaseServiceEx_AppointmentServiceID" Association="Self.FK_InsMedicalCaseServiceEx_AppointmentServiceID">
+            <End Role="InsMedicalAppointmentService" EntitySet="InsMedicalAppointmentService" />
+            <End Role="InsMedicalCaseServiceEx" EntitySet="InsMedicalCaseServiceEx" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsMedicalCaseServiceEx_InsMedicalCaseEx_CaseID" Association="Self.FK_InsMedicalCaseServiceEx_InsMedicalCaseEx_CaseID">
+            <End Role="InsMedicalCaseEx" EntitySet="InsMedicalCaseEx" />
+            <End Role="InsMedicalCaseServiceEx" EntitySet="InsMedicalCaseServiceEx" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GPIHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="InsMedicalAppointment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatorID" Type="Int32" Nullable="false" />
+          <Property Name="ApproverID" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="N" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ManualN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BranchID" Type="Int32" Nullable="false" />
+          <Property Name="InsurantPolicyID" Type="Int32" Nullable="false" />
+          <Property Name="InsurantIsInsuredInOtherCompany" Type="Boolean" />
+          <Property Name="InsurantOtherInsuranceCompany" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientPolicyID" Type="Int32" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="Patient2InsurantRelationID" Type="Int32" Nullable="false" />
+          <Property Name="Patient2InsurantRelation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PatientIsInsuredInOtherCompany" Type="Boolean" />
+          <Property Name="PatientOtherInsuranceCompany" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeclaratorID" Type="Int32" Nullable="false" />
+          <Property Name="Declarator2PatientRelationID" Type="Int32" Nullable="false" />
+          <Property Name="Declarator2PatientRelation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cursus" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ICD10" Type="Int32" />
+          <Property Name="FullDiagnosisID" Type="Int32" />
+          <Property Name="Diagnosis" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IlnessDescription" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Result" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="ExclusionComment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderID" Type="Int32" />
+          <NavigationProperty Name="InsMedicalAppointmentServices" Relationship="Self.FK_InsMedicalAppointment_InsMedicalAppointmentService_AppointmentID" FromRole="InsMedicalAppointment" ToRole="InsMedicalAppointmentService" />
+        </EntityType>
+        <EntityType Name="InsMedicalAppointmentService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppointmentID" Type="Int32" Nullable="false" />
+          <Property Name="PrescriptionFormN" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrescriptionFormNByHand" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderID" Type="Int32" Nullable="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" />
+          <Property Name="NumberOfUnits" Type="Int32" Nullable="false" />
+          <Property Name="Service" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Coverage" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="RequestedAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ServiceStart" Type="DateTime" Precision="3" />
+          <Property Name="ServiceEnd" Type="DateTime" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentResult" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="NonProviderAppointment" Type="Boolean" />
+          <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrintFormTypeID" Type="Int32" />
+          <Property Name="NCSPID" Type="Int32" />
+          <Property Name="LabTestID" Type="Int32" />
+          <Property Name="NCSPID2" Type="Int32" />
+          <Property Name="LabTestID2" Type="Int32" />
+          <Property Name="PrintCount" Type="Int32" Nullable="false" />
+          <Property Name="MedicineID" Type="Int32" />
+          <Property Name="AppointedASpecialist" Type="Boolean" />
+          <Property Name="MedicinePriority" Type="Int32" />
+          <Property Name="OriginalPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PaidByOther" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Deducted" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StateLimitExceeded" Type="Boolean" />
+          <Property Name="IsNotDefaultCoverage" Type="Boolean" />
+          <Property Name="MedicalPlanCoverageID" Type="Int32" />
+          <NavigationProperty Name="InsMedicalAppointment" Relationship="Self.FK_InsMedicalAppointment_InsMedicalAppointmentService_AppointmentID" FromRole="InsMedicalAppointmentService" ToRole="InsMedicalAppointment" />
+          <NavigationProperty Name="InsMedicalCaseServiceExes" Relationship="Self.FK_InsMedicalCaseServiceEx_AppointmentServiceID" FromRole="InsMedicalAppointmentService" ToRole="InsMedicalCaseServiceEx" />
+        </EntityType>
+        <EntityType Name="InsMedicalCaseEx">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatorID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CoordinatorID" Type="Int32" Nullable="false" />
+          <Property Name="DeclarationID" Type="Int32" />
+          <Property Name="BranchID" Type="Int32" Nullable="false" />
+          <Property Name="N" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NotificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeclaratorID" Type="Int32" Nullable="false" />
+          <Property Name="InsurantPolicyID" Type="Int32" Nullable="false" />
+          <Property Name="PatientPolicyID" Type="Int32" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="PaymentReceiverID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Invoice" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientIsInsuredInOtherCompany" Type="Boolean" />
+          <Property Name="PatientOtherInsuranceCompany" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OtherInsuranceTypeID" Type="Int32" />
+          <Property Name="ICD10" Type="Int32" />
+          <Property Name="FullDiagnosisID" Type="Int32" />
+          <Property Name="Diagnosis" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaymentReceiverBankAccountID" Type="Int32" />
+          <Property Name="InvoiceID" Type="Int32" />
+          <Property Name="ICD10_2" Type="Int32" />
+          <Property Name="ResponsiblePersonID" Type="Int32" />
+          <Property Name="ResponsiblePersonChangeDate" Type="DateTime" Precision="3" />
+          <Property Name="GuaranteeLetterDeclarationID" Type="Int32" />
+          <Property Name="VersionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="OriginalCaseID" Type="Int32" />
+          <Property Name="UID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="InsMedicalProviderInvoice" Relationship="Self.FK_InsMedicalCaseEx_InsMedicalProviderInvoice_InvoiceID" FromRole="InsMedicalCaseEx" ToRole="InsMedicalProviderInvoice" />
+          <NavigationProperty Name="InsMedicalCaseServiceExes" Relationship="Self.FK_InsMedicalCaseServiceEx_InsMedicalCaseEx_CaseID" FromRole="InsMedicalCaseEx" ToRole="InsMedicalCaseServiceEx" />
+        </EntityType>
+        <EntityType Name="InsMedicalCaseServiceEx">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseID" Type="Int32" Nullable="false" />
+          <Property Name="CreatorID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ServiceStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ServiceEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="N" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="ProviderID" Type="Int32" />
+          <Property Name="ServiceID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Coverage" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="RealPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="RealCustomerPaid" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="OtherInsurantPaid" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DeductedAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DeductionTypeID" Type="Int32" />
+          <Property Name="OurDiscountReal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ToBePaidReal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ToBePaidReal2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimManagerID" Type="Int32" />
+          <Property Name="ClaimManagerApproveDate" Type="DateTime" Precision="3" />
+          <Property Name="HeadApproverID" Type="Int32" />
+          <Property Name="HeadApproveDate" Type="DateTime" Precision="3" />
+          <Property Name="AccountantID" Type="Int32" />
+          <Property Name="AccountantApproveDate" Type="DateTime" Precision="3" />
+          <Property Name="ExclusionComment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PrescriptionFormN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppointmentServiceID" Type="Int32" />
+          <Property Name="GuaranteeLetterItemID" Type="Int32" />
+          <Property Name="ActID" Type="Int32" />
+          <Property Name="DeclaredEstimatedLoss" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NCSPID" Type="Int32" />
+          <Property Name="LabTestID" Type="Int32" />
+          <Property Name="NCSPID2" Type="Int32" />
+          <Property Name="LabTestID2" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="DeclarationServiceID" Type="Int32" />
+          <Property Name="WasCreatedFromDeclaration" Type="Boolean" />
+          <Property Name="ProviderName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BedDays" Type="Int32" />
+          <Property Name="ToothNumber" Type="Int32" />
+          <Property Name="GuaranteeLetterDeclarationServiceID" Type="Int32" />
+          <Property Name="OriginalPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MedicalClaimOperationID" Type="Int32" />
+          <Property Name="LastModifierID" Type="Int32" />
+          <Property Name="OriginalCaseServiceID" Type="Int32" />
+          <Property Name="StateLimitExceeded" Type="Boolean" />
+          <Property Name="IsNotDefaultCoverage" Type="Boolean" />
+          <Property Name="MedicalPlanCoverageID" Type="Int32" />
+          <NavigationProperty Name="InsMedicalAppointmentService" Relationship="Self.FK_InsMedicalCaseServiceEx_AppointmentServiceID" FromRole="InsMedicalCaseServiceEx" ToRole="InsMedicalAppointmentService" />
+          <NavigationProperty Name="InsMedicalCaseEx" Relationship="Self.FK_InsMedicalCaseServiceEx_InsMedicalCaseEx_CaseID" FromRole="InsMedicalCaseServiceEx" ToRole="InsMedicalCaseEx" />
+        </EntityType>
+        <EntityType Name="InsMedicalProviderInvoice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatorID" Type="Int32" Nullable="false" />
+          <Property Name="ApproverID" Type="Int32" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProviderID" Type="Int32" Nullable="false" />
+          <Property Name="N" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ServicePeriod" Type="Int32" />
+          <Property Name="OperatorID" Type="Int32" />
+          <Property Name="OperatorChangeDate" Type="DateTime" Precision="3" />
+          <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+          <Property Name="ProgrammeTypeID" Type="Int32" />
+          <Property Name="InvoiceStatusID" Type="Int32" />
+          <Property Name="ServicePeriodYear" Type="Int32" />
+          <NavigationProperty Name="InsMedicalCaseExes" Relationship="Self.FK_InsMedicalCaseEx_InsMedicalProviderInvoice_InvoiceID" FromRole="InsMedicalProviderInvoice" ToRole="InsMedicalCaseEx" />
+        </EntityType>
+        <Association Name="FK_InsMedicalAppointment_InsMedicalAppointmentService_AppointmentID">
+          <End Role="InsMedicalAppointment" Type="Self.InsMedicalAppointment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InsMedicalAppointmentService" Type="Self.InsMedicalAppointmentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsMedicalAppointment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InsMedicalAppointmentService">
+              <PropertyRef Name="AppointmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsMedicalCaseServiceEx_AppointmentServiceID">
+          <End Role="InsMedicalAppointmentService" Type="Self.InsMedicalAppointmentService" Multiplicity="0..1" />
+          <End Role="InsMedicalCaseServiceEx" Type="Self.InsMedicalCaseServiceEx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsMedicalAppointmentService">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InsMedicalCaseServiceEx">
+              <PropertyRef Name="AppointmentServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsMedicalCaseEx_InsMedicalProviderInvoice_InvoiceID">
+          <End Role="InsMedicalProviderInvoice" Type="Self.InsMedicalProviderInvoice" Multiplicity="0..1" />
+          <End Role="InsMedicalCaseEx" Type="Self.InsMedicalCaseEx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsMedicalProviderInvoice">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InsMedicalCaseEx">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsMedicalCaseServiceEx_InsMedicalCaseEx_CaseID">
+          <End Role="InsMedicalCaseEx" Type="Self.InsMedicalCaseEx" Multiplicity="1" />
+          <End Role="InsMedicalCaseServiceEx" Type="Self.InsMedicalCaseServiceEx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsMedicalCaseEx">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InsMedicalCaseServiceEx">
+              <PropertyRef Name="CaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GPIHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="InsMedicalAppointments" EntityType="Self.InsMedicalAppointment" />
+          <EntitySet Name="InsMedicalAppointmentServices" EntityType="Self.InsMedicalAppointmentService" />
+          <EntitySet Name="InsMedicalCaseExes" EntityType="Self.InsMedicalCaseEx" />
+          <EntitySet Name="InsMedicalCaseServiceExes" EntityType="Self.InsMedicalCaseServiceEx" />
+          <EntitySet Name="InsMedicalProviderInvoices" EntityType="Self.InsMedicalProviderInvoice" />
+          <AssociationSet Name="FK_InsMedicalAppointment_InsMedicalAppointmentService_AppointmentID" Association="Self.FK_InsMedicalAppointment_InsMedicalAppointmentService_AppointmentID">
+            <End Role="InsMedicalAppointment" EntitySet="InsMedicalAppointments" />
+            <End Role="InsMedicalAppointmentService" EntitySet="InsMedicalAppointmentServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsMedicalCaseServiceEx_AppointmentServiceID" Association="Self.FK_InsMedicalCaseServiceEx_AppointmentServiceID">
+            <End Role="InsMedicalAppointmentService" EntitySet="InsMedicalAppointmentServices" />
+            <End Role="InsMedicalCaseServiceEx" EntitySet="InsMedicalCaseServiceExes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsMedicalCaseEx_InsMedicalProviderInvoice_InvoiceID" Association="Self.FK_InsMedicalCaseEx_InsMedicalProviderInvoice_InvoiceID">
+            <End Role="InsMedicalProviderInvoice" EntitySet="InsMedicalProviderInvoices" />
+            <End Role="InsMedicalCaseEx" EntitySet="InsMedicalCaseExes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsMedicalCaseServiceEx_InsMedicalCaseEx_CaseID" Association="Self.FK_InsMedicalCaseServiceEx_InsMedicalCaseEx_CaseID">
+            <End Role="InsMedicalCaseEx" EntitySet="InsMedicalCaseExes" />
+            <End Role="InsMedicalCaseServiceEx" EntitySet="InsMedicalCaseServiceExes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GPIHModelStoreContainer" CdmEntityContainer="GPIHEntities">
+          <EntitySetMapping Name="InsMedicalAppointments">
+            <EntityTypeMapping TypeName="GPIHModel.InsMedicalAppointment">
+              <MappingFragment StoreEntitySet="InsMedicalAppointment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+                <ScalarProperty Name="ApproverID" ColumnName="ApproverID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="N" ColumnName="N" />
+                <ScalarProperty Name="ManualN" ColumnName="ManualN" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="InsurantPolicyID" ColumnName="InsurantPolicyID" />
+                <ScalarProperty Name="InsurantIsInsuredInOtherCompany" ColumnName="InsurantIsInsuredInOtherCompany" />
+                <ScalarProperty Name="InsurantOtherInsuranceCompany" ColumnName="InsurantOtherInsuranceCompany" />
+                <ScalarProperty Name="PatientPolicyID" ColumnName="PatientPolicyID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="Patient2InsurantRelationID" ColumnName="Patient2InsurantRelationID" />
+                <ScalarProperty Name="Patient2InsurantRelation" ColumnName="Patient2InsurantRelation" />
+                <ScalarProperty Name="PatientIsInsuredInOtherCompany" ColumnName="PatientIsInsuredInOtherCompany" />
+                <ScalarProperty Name="PatientOtherInsuranceCompany" ColumnName="PatientOtherInsuranceCompany" />
+                <ScalarProperty Name="DeclaratorID" ColumnName="DeclaratorID" />
+                <ScalarProperty Name="Declarator2PatientRelationID" ColumnName="Declarator2PatientRelationID" />
+                <ScalarProperty Name="Declarator2PatientRelation" ColumnName="Declarator2PatientRelation" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Cursus" ColumnName="Cursus" />
+                <ScalarProperty Name="ICD10" ColumnName="ICD10" />
+                <ScalarProperty Name="FullDiagnosisID" ColumnName="FullDiagnosisID" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="IlnessDescription" ColumnName="IlnessDescription" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="ExclusionComment" ColumnName="ExclusionComment" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsMedicalAppointmentServices">
+            <EntityTypeMapping TypeName="GPIHModel.InsMedicalAppointmentService">
+              <MappingFragment StoreEntitySet="InsMedicalAppointmentService">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+                <ScalarProperty Name="PrescriptionFormN" ColumnName="PrescriptionFormN" />
+                <ScalarProperty Name="PrescriptionFormNByHand" ColumnName="PrescriptionFormNByHand" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="NumberOfUnits" ColumnName="NumberOfUnits" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Coverage" ColumnName="Coverage" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="RequestedAmount" ColumnName="RequestedAmount" />
+                <ScalarProperty Name="ServiceStart" ColumnName="ServiceStart" />
+                <ScalarProperty Name="ServiceEnd" ColumnName="ServiceEnd" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="AppointmentResult" ColumnName="AppointmentResult" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="NonProviderAppointment" ColumnName="NonProviderAppointment" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="PrintFormTypeID" ColumnName="PrintFormTypeID" />
+                <ScalarProperty Name="NCSPID" ColumnName="NCSPID" />
+                <ScalarProperty Name="LabTestID" ColumnName="LabTestID" />
+                <ScalarProperty Name="NCSPID2" ColumnName="NCSPID2" />
+                <ScalarProperty Name="LabTestID2" ColumnName="LabTestID2" />
+                <ScalarProperty Name="PrintCount" ColumnName="PrintCount" />
+                <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+                <ScalarProperty Name="AppointedASpecialist" ColumnName="AppointedASpecialist" />
+                <ScalarProperty Name="MedicinePriority" ColumnName="MedicinePriority" />
+                <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
+                <ScalarProperty Name="PaidByOther" ColumnName="PaidByOther" />
+                <ScalarProperty Name="Deducted" ColumnName="Deducted" />
+                <ScalarProperty Name="StateLimitExceeded" ColumnName="StateLimitExceeded" />
+                <ScalarProperty Name="IsNotDefaultCoverage" ColumnName="IsNotDefaultCoverage" />
+                <ScalarProperty Name="MedicalPlanCoverageID" ColumnName="MedicalPlanCoverageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsMedicalCaseExes">
+            <EntityTypeMapping TypeName="GPIHModel.InsMedicalCaseEx">
+              <MappingFragment StoreEntitySet="InsMedicalCaseEx">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="CoordinatorID" ColumnName="CoordinatorID" />
+                <ScalarProperty Name="DeclarationID" ColumnName="DeclarationID" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="N" ColumnName="N" />
+                <ScalarProperty Name="NotificationDate" ColumnName="NotificationDate" />
+                <ScalarProperty Name="DeclaratorID" ColumnName="DeclaratorID" />
+                <ScalarProperty Name="InsurantPolicyID" ColumnName="InsurantPolicyID" />
+                <ScalarProperty Name="PatientPolicyID" ColumnName="PatientPolicyID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="PaymentReceiverID" ColumnName="PaymentReceiverID" />
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+                <ScalarProperty Name="Invoice" ColumnName="Invoice" />
+                <ScalarProperty Name="PatientIsInsuredInOtherCompany" ColumnName="PatientIsInsuredInOtherCompany" />
+                <ScalarProperty Name="PatientOtherInsuranceCompany" ColumnName="PatientOtherInsuranceCompany" />
+                <ScalarProperty Name="OtherInsuranceTypeID" ColumnName="OtherInsuranceTypeID" />
+                <ScalarProperty Name="ICD10" ColumnName="ICD10" />
+                <ScalarProperty Name="FullDiagnosisID" ColumnName="FullDiagnosisID" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="PaymentReceiverBankAccountID" ColumnName="PaymentReceiverBankAccountID" />
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="ICD10_2" ColumnName="ICD10_2" />
+                <ScalarProperty Name="ResponsiblePersonID" ColumnName="ResponsiblePersonID" />
+                <ScalarProperty Name="ResponsiblePersonChangeDate" ColumnName="ResponsiblePersonChangeDate" />
+                <ScalarProperty Name="GuaranteeLetterDeclarationID" ColumnName="GuaranteeLetterDeclarationID" />
+                <ScalarProperty Name="VersionTypeID" ColumnName="VersionTypeID" />
+                <ScalarProperty Name="OriginalCaseID" ColumnName="OriginalCaseID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsMedicalCaseServiceExes">
+            <EntityTypeMapping TypeName="GPIHModel.InsMedicalCaseServiceEx">
+              <MappingFragment StoreEntitySet="InsMedicalCaseServiceEx">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CaseID" ColumnName="CaseID" />
+                <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ServiceStart" ColumnName="ServiceStart" />
+                <ScalarProperty Name="ServiceEnd" ColumnName="ServiceEnd" />
+                <ScalarProperty Name="N" ColumnName="N" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Coverage" ColumnName="Coverage" />
+                <ScalarProperty Name="RealPrice" ColumnName="RealPrice" />
+                <ScalarProperty Name="RealCustomerPaid" ColumnName="RealCustomerPaid" />
+                <ScalarProperty Name="OtherInsurantPaid" ColumnName="OtherInsurantPaid" />
+                <ScalarProperty Name="DeductedAmount" ColumnName="DeductedAmount" />
+                <ScalarProperty Name="DeductionTypeID" ColumnName="DeductionTypeID" />
+                <ScalarProperty Name="OurDiscountReal" ColumnName="OurDiscountReal" />
+                <ScalarProperty Name="ToBePaidReal" ColumnName="ToBePaidReal" />
+                <ScalarProperty Name="ToBePaidReal2" ColumnName="ToBePaidReal2" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ClaimManagerID" ColumnName="ClaimManagerID" />
+                <ScalarProperty Name="ClaimManagerApproveDate" ColumnName="ClaimManagerApproveDate" />
+                <ScalarProperty Name="HeadApproverID" ColumnName="HeadApproverID" />
+                <ScalarProperty Name="HeadApproveDate" ColumnName="HeadApproveDate" />
+                <ScalarProperty Name="AccountantID" ColumnName="AccountantID" />
+                <ScalarProperty Name="AccountantApproveDate" ColumnName="AccountantApproveDate" />
+                <ScalarProperty Name="ExclusionComment" ColumnName="ExclusionComment" />
+                <ScalarProperty Name="PrescriptionFormN" ColumnName="PrescriptionFormN" />
+                <ScalarProperty Name="AppointmentServiceID" ColumnName="AppointmentServiceID" />
+                <ScalarProperty Name="GuaranteeLetterItemID" ColumnName="GuaranteeLetterItemID" />
+                <ScalarProperty Name="ActID" ColumnName="ActID" />
+                <ScalarProperty Name="DeclaredEstimatedLoss" ColumnName="DeclaredEstimatedLoss" />
+                <ScalarProperty Name="NCSPID" ColumnName="NCSPID" />
+                <ScalarProperty Name="LabTestID" ColumnName="LabTestID" />
+                <ScalarProperty Name="NCSPID2" ColumnName="NCSPID2" />
+                <ScalarProperty Name="LabTestID2" ColumnName="LabTestID2" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="DeclarationServiceID" ColumnName="DeclarationServiceID" />
+                <ScalarProperty Name="WasCreatedFromDeclaration" ColumnName="WasCreatedFromDeclaration" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="BedDays" ColumnName="BedDays" />
+                <ScalarProperty Name="ToothNumber" ColumnName="ToothNumber" />
+                <ScalarProperty Name="GuaranteeLetterDeclarationServiceID" ColumnName="GuaranteeLetterDeclarationServiceID" />
+                <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
+                <ScalarProperty Name="MedicalClaimOperationID" ColumnName="MedicalClaimOperationID" />
+                <ScalarProperty Name="LastModifierID" ColumnName="LastModifierID" />
+                <ScalarProperty Name="OriginalCaseServiceID" ColumnName="OriginalCaseServiceID" />
+                <ScalarProperty Name="StateLimitExceeded" ColumnName="StateLimitExceeded" />
+                <ScalarProperty Name="IsNotDefaultCoverage" ColumnName="IsNotDefaultCoverage" />
+                <ScalarProperty Name="MedicalPlanCoverageID" ColumnName="MedicalPlanCoverageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsMedicalProviderInvoices">
+            <EntityTypeMapping TypeName="GPIHModel.InsMedicalProviderInvoice">
+              <MappingFragment StoreEntitySet="InsMedicalProviderInvoice">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
+                <ScalarProperty Name="ApproverID" ColumnName="ApproverID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="N" ColumnName="N" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ServicePeriod" ColumnName="ServicePeriod" />
+                <ScalarProperty Name="OperatorID" ColumnName="OperatorID" />
+                <ScalarProperty Name="OperatorChangeDate" ColumnName="OperatorChangeDate" />
+                <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+                <ScalarProperty Name="ProgrammeTypeID" ColumnName="ProgrammeTypeID" />
+                <ScalarProperty Name="InvoiceStatusID" ColumnName="InvoiceStatusID" />
+                <ScalarProperty Name="ServicePeriodYear" ColumnName="ServicePeriodYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

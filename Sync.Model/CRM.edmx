@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClinicPerformedServices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="PolicyN" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ApplyNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_SyncGPIH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceID" Type="int" Nullable="false" />
+          <Property Name="GPIHID" Type="int" />
+          <Property Name="StatusID" Type="tinyint" Nullable="false" />
+          <Property Name="TryCount" Type="int" Nullable="false" />
+          <Property Name="ErrorText" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="SyncDate" Type="datetime" />
+        </EntityType>
+        <Function Name="SP_T_SyncGPIH_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Sync" />
+        <EntityContainer Name="CRMModelStoreContainer">
+          <EntitySet Name="ClinicPerformedServices" EntityType="Self.ClinicPerformedServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_SyncGPIH" EntityType="Self.T_SyncGPIH" Schema="Sync" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="T_SyncGPIH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <Property Name="GPIHID" Type="Int32" />
+          <Property Name="StatusID" Type="Byte" Nullable="false" />
+          <Property Name="TryCount" Type="Int32" Nullable="false" />
+          <Property Name="ErrorText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SyncDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="CRMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_SyncGPIH" EntityType="Self.T_SyncGPIH" />
+          <FunctionImport Name="SP_T_SyncGPIH_Get" EntitySet="T_SyncGPIH" ReturnType="Collection(CRMModel.T_SyncGPIH)" />
+          <EntitySet Name="ClinicPerformedServices" EntityType="CRMModel.ClinicPerformedService" />
+        </EntityContainer>
+        <EntityType Name="ClinicPerformedService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PolicyN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRMModelStoreContainer" CdmEntityContainer="CRMEntities">
+          <EntitySetMapping Name="T_SyncGPIH">
+            <EntityTypeMapping TypeName="CRMModel.T_SyncGPIH">
+              <MappingFragment StoreEntitySet="T_SyncGPIH">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="GPIHID" ColumnName="GPIHID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="TryCount" ColumnName="TryCount" />
+                <ScalarProperty Name="ErrorText" ColumnName="ErrorText" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="SyncDate" ColumnName="SyncDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_T_SyncGPIH_Get" FunctionName="CRMModel.Store.SP_T_SyncGPIH_Get">
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ClinicPerformedServices">
+            <EntityTypeMapping TypeName="CRMModel.ClinicPerformedService">
+              <MappingFragment StoreEntitySet="ClinicPerformedServices">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ApplyNumber" ColumnName="ApplyNumber" />
+                <ScalarProperty Name="PolicyN" ColumnName="PolicyN" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
