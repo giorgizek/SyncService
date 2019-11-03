@@ -40,8 +40,8 @@
             // serviceInstaller
             // 
             this.serviceInstaller.Description = "კურაციოს ჩატარებული სერვისების სინქრონიზაციის სერვისი ჯიპიაის ზარალებთან";
-            this.serviceInstaller.DisplayName = "CRM.ClinicPerformedService to GPIH.InsMedicalCaseServiceEx";
-            this.serviceInstaller.ServiceName = "CRM_ClinicPerformedService_GPIH_InsMedicalCaseServiceEx";
+            this.serviceInstaller.DisplayName = "CRM.ClinicPerformedService to INS.InsMedicalCaseServiceEx";
+            this.serviceInstaller.ServiceName = "CRM_ClinicPerformedService_INS_InsMedicalCaseServiceEx";
             this.serviceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller

@@ -14,10 +14,10 @@ namespace Sync.Win
         private const string IV = "20131001";
 
 
-        internal static string GPIH_Server { get; set; }
-        internal static string GPIH_Database { get; set; }
-        internal static string GPIH_User { get; set; }
-        internal static string GPIH_Password { get; set; }
+        internal static string INS_Server { get; set; }
+        internal static string INS_Database { get; set; }
+        internal static string INS_User { get; set; }
+        internal static string INS_Password { get; set; }
 
         internal static string CRM_Server { get; set; }
         internal static string CRM_Database { get; set; }
@@ -72,13 +72,13 @@ namespace Sync.Win
             OurDiscountReal = ConfigurationManager.AppSettings["OurDiscountReal"].ToDecimal();
 
 
-            GPIH_Server = ConfigurationManager.AppSettings["GPIH_Server"];
-            GPIH_Database = ConfigurationManager.AppSettings["GPIH_Database"];
-            GPIH_User = ConfigurationManager.AppSettings["GPIH_User"];
+            INS_Server = ConfigurationManager.AppSettings["INS_Server"];
+            INS_Database = ConfigurationManager.AppSettings["INS_Database"];
+            INS_User = ConfigurationManager.AppSettings["INS_User"];
 
-            var pass = ConfigurationManager.AppSettings["GPIH_Password"];
+            var pass = ConfigurationManager.AppSettings["INS_Password"];
             if (pass.IsNotNullAndWhiteSpace())
-                GPIH_Password = SymCryptoHelper.TripleDESDecrypt(pass, Salt, Key, IV);
+                INS_Password = SymCryptoHelper.TripleDESDecrypt(pass, Salt, Key, IV);
 
 
             CRM_Server = ConfigurationManager.AppSettings["CRM_Server"];
@@ -109,10 +109,10 @@ namespace Sync.Win
                 Set(config, "OurDiscountReal", OurDiscountReal.ToNullableString());
 
 
-                Set(config, "GPIH_Server", GPIH_Server.IfNullEmpty());
-                Set(config, "GPIH_Database", GPIH_Database.IfNullEmpty());
-                Set(config, "GPIH_User", GPIH_User.IfNullEmpty());
-                Set(config, "GPIH_Password", SymCryptoHelper.TripleDESEncrypt(GPIH_Password.IfNullEmpty(), Salt, Key, IV));
+                Set(config, "INS_Server", INS_Server.IfNullEmpty());
+                Set(config, "INS_Database", INS_Database.IfNullEmpty());
+                Set(config, "INS_User", INS_User.IfNullEmpty());
+                Set(config, "INS_Password", SymCryptoHelper.TripleDESEncrypt(INS_Password.IfNullEmpty(), Salt, Key, IV));
 
                 Set(config, "CRM_Server", CRM_Server.IfNullEmpty());
                 Set(config, "CRM_Database", CRM_Database.IfNullEmpty());
@@ -138,11 +138,11 @@ namespace Sync.Win
         }
 
 
-        public static string GPIHConnectionString;
+        public static string INSConnectionString;
         public static string CRMConnectionString;
         public static void BuilderConnectionStrings()
         {
-            GPIHConnectionString = SqlConnectionStringHelper.GetConnectionString(GPIH_Server, GPIH_Database, GPIH_User, GPIH_Password);
+            INSConnectionString = SqlConnectionStringHelper.GetConnectionString(INS_Server, INS_Database, INS_User, INS_Password);
             CRMConnectionString = SqlConnectionStringHelper.GetConnectionString(CRM_Server, CRM_Database, CRM_User, CRM_Password);
         }
 

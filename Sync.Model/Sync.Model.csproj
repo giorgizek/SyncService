@@ -71,43 +71,43 @@
       <DependentUpon>CRM.edmx</DependentUpon>
     </Compile>
     <Compile Include="DD_InsMedicalProviderInvoiceStatus.cs" />
-    <Compile Include="GPIH.Context.cs">
+    <Compile Include="INS.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GPIH.Context.tt</DependentUpon>
+      <DependentUpon>INS.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="GPIH.cs">
+    <Compile Include="INS.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GPIH.tt</DependentUpon>
+      <DependentUpon>INS.tt</DependentUpon>
     </Compile>
-    <Compile Include="GPIH.Designer.cs">
+    <Compile Include="INS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GPIH.edmx</DependentUpon>
+      <DependentUpon>INS.edmx</DependentUpon>
     </Compile>
     <Compile Include="InsMedicalAppointment.cs">
-      <DependentUpon>GPIH.tt</DependentUpon>
+      <DependentUpon>INS.tt</DependentUpon>
     </Compile>
     <Compile Include="InsMedicalAppointmentService.cs">
-      <DependentUpon>GPIH.tt</DependentUpon>
+      <DependentUpon>INS.tt</DependentUpon>
     </Compile>
     <Compile Include="InsMedicalCaseEx.cs">
-      <DependentUpon>GPIH.tt</DependentUpon>
+      <DependentUpon>INS.tt</DependentUpon>
     </Compile>
     <Compile Include="InsMedicalCaseServiceEx.cs">
-      <DependentUpon>GPIH.tt</DependentUpon>
+      <DependentUpon>INS.tt</DependentUpon>
     </Compile>
     <Compile Include="InsMedicalProviderInvoice.cs">
-      <DependentUpon>GPIH.tt</DependentUpon>
+      <DependentUpon>INS.tt</DependentUpon>
     </Compile>
     <Compile Include="Status.cs" />
-    <Compile Include="T_SyncGPIH.cs">
+    <Compile Include="T_SyncINS.cs">
       <DependentUpon>CRM.tt</DependentUpon>
     </Compile>
     <Compile Include="_CRMEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_GPIHEntities.cs" />
+    <Compile Include="_INSEntities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -133,22 +133,22 @@
       <DependentUpon>CRM.edmx</DependentUpon>
       <LastGenOutput>CRM.cs</LastGenOutput>
     </None>
-    <EntityDeploy Include="GPIH.edmx">
+    <EntityDeploy Include="INS.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GPIH.Designer.cs</LastGenOutput>
+      <LastGenOutput>INS.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="GPIH.Context.tt">
+    <None Include="INS.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GPIH.edmx</DependentUpon>
-      <LastGenOutput>GPIH.Context.cs</LastGenOutput>
+      <DependentUpon>INS.edmx</DependentUpon>
+      <LastGenOutput>INS.Context.cs</LastGenOutput>
     </None>
-    <None Include="GPIH.edmx.diagram">
-      <DependentUpon>GPIH.edmx</DependentUpon>
+    <None Include="INS.edmx.diagram">
+      <DependentUpon>INS.edmx</DependentUpon>
     </None>
-    <None Include="GPIH.tt">
+    <None Include="INS.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GPIH.edmx</DependentUpon>
-      <LastGenOutput>GPIH.cs</LastGenOutput>
+      <DependentUpon>INS.edmx</DependentUpon>
+      <LastGenOutput>INS.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

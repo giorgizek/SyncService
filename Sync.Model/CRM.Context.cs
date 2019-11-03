@@ -27,17 +27,17 @@ namespace Sync.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<T_SyncGPIH> T_SyncGPIH { get; set; }
+        public virtual DbSet<T_SyncINS> T_SyncINS { get; set; }
         public virtual DbSet<ClinicPerformedService> ClinicPerformedServices { get; set; }
     
-        public virtual ObjectResult<T_SyncGPIH> SP_T_SyncGPIH_Get()
+        public virtual ObjectResult<T_SyncINS> SP_T_SyncINS_Get()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<T_SyncGPIH>("SP_T_SyncGPIH_Get");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<T_SyncINS>("SP_T_SyncINS_Get");
         }
     
-        public virtual ObjectResult<T_SyncGPIH> SP_T_SyncGPIH_Get(MergeOption mergeOption)
+        public virtual ObjectResult<T_SyncINS> SP_T_SyncINS_Get(MergeOption mergeOption)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<T_SyncGPIH>("SP_T_SyncGPIH_Get", mergeOption);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<T_SyncINS>("SP_T_SyncINS_Get", mergeOption);
         }
     }
 }

@@ -15,35 +15,35 @@
           <Property Name="ApplyNumber" Type="nvarchar" MaxLength="100" />
           <Property Name="Price" Type="money" Nullable="false" />
         </EntityType>
-        <EntityType Name="T_SyncGPIH">
+        <EntityType Name="T_SyncINS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ServiceID" Type="int" Nullable="false" />
-          <Property Name="GPIHID" Type="int" />
+          <Property Name="INSID" Type="int" />
           <Property Name="StatusID" Type="tinyint" Nullable="false" />
           <Property Name="TryCount" Type="int" Nullable="false" />
           <Property Name="ErrorText" Type="nvarchar" MaxLength="500" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="SyncDate" Type="datetime" />
         </EntityType>
-        <Function Name="SP_T_SyncGPIH_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Sync" />
+        <Function Name="SP_T_SyncINS_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Sync" />
         <EntityContainer Name="CRMModelStoreContainer">
           <EntitySet Name="ClinicPerformedServices" EntityType="Self.ClinicPerformedServices" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_SyncGPIH" EntityType="Self.T_SyncGPIH" Schema="Sync" store:Type="Tables" />
+          <EntitySet Name="T_SyncINS" EntityType="Self.T_SyncINS" Schema="Sync" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="T_SyncGPIH">
+        <EntityType Name="T_SyncINS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ServiceID" Type="Int32" Nullable="false" />
-          <Property Name="GPIHID" Type="Int32" />
+          <Property Name="INSID" Type="Int32" />
           <Property Name="StatusID" Type="Byte" Nullable="false" />
           <Property Name="TryCount" Type="Int32" Nullable="false" />
           <Property Name="ErrorText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -51,8 +51,8 @@
           <Property Name="SyncDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="CRMEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="T_SyncGPIH" EntityType="Self.T_SyncGPIH" />
-          <FunctionImport Name="SP_T_SyncGPIH_Get" EntitySet="T_SyncGPIH" ReturnType="Collection(CRMModel.T_SyncGPIH)" />
+          <EntitySet Name="T_SyncINS" EntityType="Self.T_SyncINS" />
+          <FunctionImport Name="SP_T_SyncINS_Get" EntitySet="T_SyncINS" ReturnType="Collection(CRMModel.T_SyncINS)" />
           <EntitySet Name="ClinicPerformedServices" EntityType="CRMModel.ClinicPerformedService" />
         </EntityContainer>
         <EntityType Name="ClinicPerformedService">
@@ -71,12 +71,12 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CRMModelStoreContainer" CdmEntityContainer="CRMEntities">
-          <EntitySetMapping Name="T_SyncGPIH">
-            <EntityTypeMapping TypeName="CRMModel.T_SyncGPIH">
-              <MappingFragment StoreEntitySet="T_SyncGPIH">
+          <EntitySetMapping Name="T_SyncINS">
+            <EntityTypeMapping TypeName="CRMModel.T_SyncINS">
+              <MappingFragment StoreEntitySet="T_SyncINS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
-                <ScalarProperty Name="GPIHID" ColumnName="GPIHID" />
+                <ScalarProperty Name="INSID" ColumnName="INSID" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="TryCount" ColumnName="TryCount" />
                 <ScalarProperty Name="ErrorText" ColumnName="ErrorText" />
@@ -85,7 +85,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_T_SyncGPIH_Get" FunctionName="CRMModel.Store.SP_T_SyncGPIH_Get">
+          <FunctionImportMapping FunctionImportName="SP_T_SyncINS_Get" FunctionName="CRMModel.Store.SP_T_SyncINS_Get">
           </FunctionImportMapping>
           <EntitySetMapping Name="ClinicPerformedServices">
             <EntityTypeMapping TypeName="CRMModel.ClinicPerformedService">

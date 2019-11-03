@@ -12,11 +12,11 @@ namespace Sync.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class T_SyncGPIH
+    public partial class T_SyncINS
     {
         public int ID { get; set; }
         public int ServiceID { get; set; }
-        public Nullable<int> GPIHID { get; set; }
+        public Nullable<int> INSID { get; set; }
         public byte StatusID { get; set; }
         public int TryCount { get; set; }
         public string ErrorText { get; set; }

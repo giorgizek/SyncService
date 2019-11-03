@@ -13,10 +13,10 @@ namespace Sync.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class GPIHEntities : DbContext
+    public partial class INSEntities : DbContext
     {
-        public GPIHEntities()
-            : base("name=GPIHEntities")
+        public INSEntities()
+            : base("name=INSEntities")
         {
         }
     

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GPIHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="INSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="InsMedicalAppointment">
           <Key>
             <PropertyRef Name="ID" />
@@ -242,7 +242,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GPIHModelStoreContainer">
+        <EntityContainer Name="INSModelStoreContainer">
           <EntitySet Name="InsMedicalAppointment" EntityType="Self.InsMedicalAppointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InsMedicalAppointmentService" EntityType="Self.InsMedicalAppointmentService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InsMedicalCaseEx" EntityType="Self.InsMedicalCaseEx" Schema="dbo" store:Type="Tables" />
@@ -269,7 +269,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="GPIHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="INSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="InsMedicalAppointment">
           <Key>
             <PropertyRef Name="ID" />
@@ -515,7 +515,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GPIHEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="INSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="InsMedicalAppointments" EntityType="Self.InsMedicalAppointment" />
           <EntitySet Name="InsMedicalAppointmentServices" EntityType="Self.InsMedicalAppointmentService" />
           <EntitySet Name="InsMedicalCaseExes" EntityType="Self.InsMedicalCaseEx" />
@@ -543,9 +543,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GPIHModelStoreContainer" CdmEntityContainer="GPIHEntities">
+        <EntityContainerMapping StorageEntityContainer="INSModelStoreContainer" CdmEntityContainer="INSEntities">
           <EntitySetMapping Name="InsMedicalAppointments">
-            <EntityTypeMapping TypeName="GPIHModel.InsMedicalAppointment">
+            <EntityTypeMapping TypeName="INSModel.InsMedicalAppointment">
               <MappingFragment StoreEntitySet="InsMedicalAppointment">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
@@ -580,7 +580,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InsMedicalAppointmentServices">
-            <EntityTypeMapping TypeName="GPIHModel.InsMedicalAppointmentService">
+            <EntityTypeMapping TypeName="INSModel.InsMedicalAppointmentService">
               <MappingFragment StoreEntitySet="InsMedicalAppointmentService">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
@@ -621,7 +621,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InsMedicalCaseExes">
-            <EntityTypeMapping TypeName="GPIHModel.InsMedicalCaseEx">
+            <EntityTypeMapping TypeName="INSModel.InsMedicalCaseEx">
               <MappingFragment StoreEntitySet="InsMedicalCaseEx">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
@@ -658,7 +658,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InsMedicalCaseServiceExes">
-            <EntityTypeMapping TypeName="GPIHModel.InsMedicalCaseServiceEx">
+            <EntityTypeMapping TypeName="INSModel.InsMedicalCaseServiceEx">
               <MappingFragment StoreEntitySet="InsMedicalCaseServiceEx">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CaseID" ColumnName="CaseID" />
@@ -715,7 +715,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InsMedicalProviderInvoices">
-            <EntityTypeMapping TypeName="GPIHModel.InsMedicalProviderInvoice">
+            <EntityTypeMapping TypeName="INSModel.InsMedicalProviderInvoice">
               <MappingFragment StoreEntitySet="InsMedicalProviderInvoice">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />

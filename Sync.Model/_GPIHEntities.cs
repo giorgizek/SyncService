@@ -3,21 +3,21 @@ using System.Data.Entity.Infrastructure;
 
 namespace Sync.Model
 {
-    public partial class GPIHEntities
+    public partial class INSEntities
     {
-        public static GPIHEntities CreateInstance(string connectionString)
+        public static INSEntities CreateInstance(string connectionString)
         {
             var entityBuilder = new EntityConnectionStringBuilder
             {
                 Provider = "System.Data.SqlClient",
                 ProviderConnectionString = connectionString,
-                Metadata = @"res://*/GPIH.csdl|res://*/GPIH.ssdl|res://*/GPIH.msl"
+                Metadata = @"res://*/INS.csdl|res://*/INS.ssdl|res://*/INS.msl"
             };
 
-            return new GPIHEntities(entityBuilder.ToString());
+            return new INSEntities(entityBuilder.ToString());
         }
 
-         public GPIHEntities(string connectionString, int? commandTimeOut = null)
+         public INSEntities(string connectionString, int? commandTimeOut = null)
             : base(connectionString)
         {
             if (commandTimeOut != null)

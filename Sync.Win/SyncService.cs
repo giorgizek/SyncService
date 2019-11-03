@@ -67,43 +67,43 @@ namespace Sync.Win
             }
 
 
-            var isGPIHEmpty = false;
-            if (AppConfig.GPIH_Server.IsNullOrWhiteSpace())
+            var isINSEmpty = false;
+            if (AppConfig.INS_Server.IsNullOrWhiteSpace())
             {
-                isGPIHEmpty = true;
+                isINSEmpty = true;
                 if (IsWriteLine)
                 {
-                    Console.Write("GPIH_Server: ");
-                    AppConfig.GPIH_Server = Console.ReadLine();
+                    Console.Write("INS_Server: ");
+                    AppConfig.INS_Server = Console.ReadLine();
                 }
-                if (AppConfig.GPIH_Server.IsNullOrWhiteSpace())
-                    throw new ConfigurationErrorsException("GPIH_Server is null or white space");
+                if (AppConfig.INS_Server.IsNullOrWhiteSpace())
+                    throw new ConfigurationErrorsException("INS_Server is null or white space");
             }
 
-            if (AppConfig.GPIH_Database.IsNullOrWhiteSpace())
+            if (AppConfig.INS_Database.IsNullOrWhiteSpace())
             {
-                isGPIHEmpty = true;
+                isINSEmpty = true;
                 if (IsWriteLine)
                 {
-                    Console.Write("GPIH_Database: ");
-                    AppConfig.GPIH_Database = Console.ReadLine();
+                    Console.Write("INS_Database: ");
+                    AppConfig.INS_Database = Console.ReadLine();
                 }
 
-                if (AppConfig.GPIH_Database.IsNullOrWhiteSpace())
-                    throw new ConfigurationErrorsException("GPIH_Database is null or white space");
+                if (AppConfig.INS_Database.IsNullOrWhiteSpace())
+                    throw new ConfigurationErrorsException("INS_Database is null or white space");
             }
 
-            if (isGPIHEmpty && AppConfig.GPIH_User.IsNullOrWhiteSpace())
+            if (isINSEmpty && AppConfig.INS_User.IsNullOrWhiteSpace())
             {
                 if (IsWriteLine)
                 {
-                    Console.Write("GPIH_User: ");
-                    AppConfig.GPIH_User = Console.ReadLine();
+                    Console.Write("INS_User: ");
+                    AppConfig.INS_User = Console.ReadLine();
 
-                    if (AppConfig.GPIH_User.IsNotNullAndWhiteSpace())
+                    if (AppConfig.INS_User.IsNotNullAndWhiteSpace())
                     {
-                        Console.Write("GPIH_Password: ");
-                        AppConfig.GPIH_Password = Console.ReadLine();
+                        Console.Write("INS_Password: ");
+                        AppConfig.INS_Password = Console.ReadLine();
                     }
                 }
             }
@@ -150,7 +150,7 @@ namespace Sync.Win
                 }
             }
 
-            if (isGPIHEmpty || isCRMEmpty)
+            if (isINSEmpty || isCRMEmpty)
             {
                 AppConfig.Save();
             }
@@ -189,7 +189,7 @@ namespace Sync.Win
 
             var invoiceNumber = GetClaimNumber(string.Empty, date);
             var invoiceNumberMed = GetClaimNumber("MED", date);
-            using (var db = GPIHEntities.CreateInstance(AppConfig.GPIHConnectionString))
+            using (var db = INSEntities.CreateInstance(AppConfig.INSConnectionString))
             {
                 var passiveStatusID = DD_InsMedicalProviderInvoiceStatus.Passive.ToInt32();
                 var invoice = db.InsMedicalProviderInvoices.FirstOrDefault(v => v.N == invoiceNumber && v.InvoiceStatusID == passiveStatusID);
@@ -233,11 +233,11 @@ namespace Sync.Win
             }
         }
 
-        private List<T_SyncGPIH> SP_T_SyncGPIH_Get()
+        private List<T_SyncINS> SP_T_SyncINS_Get()
         {
             using (var db = CRMEntities.CreateInstance(AppConfig.CRMConnectionString))
             {
-                return db.SP_T_SyncGPIH_Get(MergeOption.NoTracking).ToList();
+                return db.SP_T_SyncINS_Get(MergeOption.NoTracking).ToList();
             }
         }
         private static string GetClaimNumber(string policyNumber, DateTime date)
@@ -247,21 +247,21 @@ namespace Sync.Win
                 : string.Format("CUR {0}/{1}", date.Year, date.Month);
         }
 
-        private void T_SyncGPIHSet(T_SyncGPIH sync, int? gpihID, Status status, string errorText, DateTime? syncDate)
+        private void T_SyncINSSet(T_SyncINS sync, int? INSID, Status status, string errorText, DateTime? syncDate)
         {
-            sync.GPIHID = gpihID;
+            sync.INSID = INSID;
             sync.StatusID = status.ToByte();
             sync.ErrorText = errorText;
             sync.SyncDate = syncDate;
         }
         private void ExecutePerformedService()
         {
-            var toBeSyncedList = SP_T_SyncGPIH_Get();
-            EventLog.WriteEntry(string.Format("Starting T_SyncGPIH (Count: {0})", toBeSyncedList.Count));
+            var toBeSyncedList = SP_T_SyncINS_Get();
+            EventLog.WriteEntry(string.Format("Starting T_SyncINS (Count: {0})", toBeSyncedList.Count));
             if (IsWriteLine)
             {
                 Console.WriteLine();
-                Console.WriteLine("Starting T_SyncGPIH (Count: {0})", toBeSyncedList.Count);
+                Console.WriteLine("Starting T_SyncINS (Count: {0})", toBeSyncedList.Count);
             }
 
             var doneCount = 0;
@@ -276,10 +276,10 @@ namespace Sync.Win
 
                 using (var dbCrm = CRMEntities.CreateInstance(AppConfig.CRMConnectionString))
                 {
-                    dbCrm.T_SyncGPIH.Attach(sync);
+                    dbCrm.T_SyncINS.Attach(sync);
                     try
                     {
-                        using (var dbGPIH = GPIHEntities.CreateInstance(AppConfig.GPIHConnectionString))
+                        using (var dbINS = INSEntities.CreateInstance(AppConfig.INSConnectionString))
                         {
                             var crm = dbCrm.ClinicPerformedServices.AsNoTracking().FirstOrDefault(s => s.ID == sync.ServiceID);
                             //როცა კურაციოში ჩანაწერი არსებობს (არ წაუშლიათ), მაშინ უნდა დაასინქრონიზოს.
@@ -288,7 +288,7 @@ namespace Sync.Win
                                 //როცა ApplyNumber არის ცარიელი, მაშინ უნდა გადაახტეს
                                 if (crm.ApplyNumber.IsNullOrWhiteSpace())
                                 {
-                                    T_SyncGPIHSet(sync, sync.GPIHID, Status.Synced, null, DateTime.Now);
+                                    T_SyncINSSet(sync, sync.INSID, Status.Synced, null, DateTime.Now);
                                     dbCrm.SaveChanges();
                                     doneCount++;
                                     continue;
@@ -296,18 +296,18 @@ namespace Sync.Win
 
                                 if (crm.Price == 0m)
                                 {
-                                    T_SyncGPIHSet(sync, null, Status.Synced, "ZERO", DateTime.Now);
+                                    T_SyncINSSet(sync, null, Status.Synced, "ZERO", DateTime.Now);
                                     dbCrm.SaveChanges();
                                     doneCount++;
                                     continue;
                                 }
 
                                 crm.ApplyNumber = crm.ApplyNumber.Trim();
-                                var apptService = dbGPIH.InsMedicalAppointmentServices.AsNoTracking().FirstOrDefault(a => a.PrescriptionFormN == crm.ApplyNumber);
+                                var apptService = dbINS.InsMedicalAppointmentServices.AsNoTracking().FirstOrDefault(a => a.PrescriptionFormN == crm.ApplyNumber);
                                 //თუ ვერ იპოვა მიმართვის ნომრით ჯიპიაის ბაზაში მაშინ უნდა გადაახტეს.
                                 if (apptService == null)
                                 {
-                                    T_SyncGPIHSet(sync, sync.GPIHID, Status.Synced, "NOT FOUND", DateTime.Now);
+                                    T_SyncINSSet(sync, sync.INSID, Status.Synced, "NOT FOUND", DateTime.Now);
                                     dbCrm.SaveChanges();
                                     doneCount++;
                                     continue;
@@ -315,7 +315,7 @@ namespace Sync.Win
 
                                 if (apptService.StatusID == 82001) //passive
                                 {
-                                    T_SyncGPIHSet(sync, sync.GPIHID, Status.Synced, "PASSIVE", DateTime.Now);
+                                    T_SyncINSSet(sync, sync.INSID, Status.Synced, "PASSIVE", DateTime.Now);
                                     dbCrm.SaveChanges();
                                     doneCount++;
                                     continue;
@@ -324,7 +324,7 @@ namespace Sync.Win
 
                                 if (!AppConfig.AppointmentServiceProviders.Contains(apptService.ProviderID)) //111
                                 {
-                                    T_SyncGPIHSet(sync, sync.GPIHID, Status.Synced, "NOT VALID PROVIDER", DateTime.Now);
+                                    T_SyncINSSet(sync, sync.INSID, Status.Synced, "NOT VALID PROVIDER", DateTime.Now);
                                     dbCrm.SaveChanges();
                                     doneCount++;
                                     continue;
@@ -333,10 +333,10 @@ namespace Sync.Win
 
 
                                 var appointment = apptService.InsMedicalAppointment;
-                                var caseServiceEx = dbGPIH.InsMedicalCaseServiceExes.AsNoTracking().FirstOrDefault(c => c.AppointmentServiceID == apptService.ID);
+                                var caseServiceEx = dbINS.InsMedicalCaseServiceExes.AsNoTracking().FirstOrDefault(c => c.AppointmentServiceID == apptService.ID);
                                 if (caseServiceEx != null)
                                 {
-                                    T_SyncGPIHSet(sync, caseServiceEx.ID, Status.Synced, "ALREADY EXISTS", DateTime.Now);
+                                    T_SyncINSSet(sync, caseServiceEx.ID, Status.Synced, "ALREADY EXISTS", DateTime.Now);
 
                                     dbCrm.SaveChanges();
                                     doneCount++;
@@ -346,7 +346,7 @@ namespace Sync.Win
                                 var endOfMonth = crm.Date.GetEndOfMonth().Date;
                                 var claimNumber = GetClaimNumber(crm.PolicyN, crm.Date);
 
-                                var invoice = dbGPIH.InsMedicalProviderInvoices.FirstOrDefault(v => v.N == claimNumber);
+                                var invoice = dbINS.InsMedicalProviderInvoices.FirstOrDefault(v => v.N == claimNumber);
                                 //.FirstOrDefault(v => v.ProviderID == AppConfig.ProviderID && v.ServicePeriodYear == endOfMonth.Year && v.ServicePeriod == endOfMonth.Month);
                                 if (invoice == null)
                                 {
@@ -368,7 +368,7 @@ namespace Sync.Win
                                         InvoiceStatusID = DD_InsMedicalProviderInvoiceStatus.Passive.ToInt32(),
                                         ServicePeriodYear = endOfMonth.Year
                                     };
-                                    dbGPIH.InsMedicalProviderInvoices.Add(invoice);
+                                    dbINS.InsMedicalProviderInvoices.Add(invoice);
                                 }
 
                                 //ვქმნით ახალ ქეის სერვის და ქეისს (ერთი ერთთან არის კავშირი) 
@@ -471,44 +471,44 @@ namespace Sync.Win
                                 caseServiceEx.ToBePaidReal2 = caseServiceEx.ToBePaidReal;
                                 caseServiceEx.DeclaredEstimatedLoss = caseServiceEx.ToBePaidReal;
 
-                                dbGPIH.InsMedicalCaseServiceExes.Add(caseServiceEx);
-                                dbGPIH.SaveChanges();
+                                dbINS.InsMedicalCaseServiceExes.Add(caseServiceEx);
+                                dbINS.SaveChanges();
 
-                                T_SyncGPIHSet(sync, caseServiceEx.ID, Status.Synced, "ADD", DateTime.Now);
+                                T_SyncINSSet(sync, caseServiceEx.ID, Status.Synced, "ADD", DateTime.Now);
                             }
                             else //როცა წაიშალა კურაციოში ჩანაწერი, უნდა განულდეს ჯიპიაის ქეისი.
                             {
-                                var lastSyncID = dbCrm.T_SyncGPIH.Where(s => s.ServiceID == sync.ServiceID && s.GPIHID != null).Max(m => (int?)m.ID); //ვპოულობთ crm სერვისი რა ID-ით დასინქტრონიზდა.
+                                var lastSyncID = dbCrm.T_SyncINS.Where(s => s.ServiceID == sync.ServiceID && s.INSID != null).Max(m => (int?)m.ID); //ვპოულობთ crm სერვისი რა ID-ით დასინქტრონიზდა.
                                 if (lastSyncID == null) //თუ არ გადმოუტანია ჯიპიაის ქეისებში მაშინ არაფერი არ უნდა მოხდეს.
                                 {
-                                    T_SyncGPIHSet(sync, sync.GPIHID, Status.Synced, null, DateTime.Now);
+                                    T_SyncINSSet(sync, sync.INSID, Status.Synced, null, DateTime.Now);
                                 }
                                 else
                                 {
-                                    var lastSync = dbCrm.T_SyncGPIH.FirstOrDefault(s => s.ID == lastSyncID); //კიდევ ერთხელ შევამოწმოთ ბოლო სინქრონიზაცია არსებობს თუ არა.
+                                    var lastSync = dbCrm.T_SyncINS.FirstOrDefault(s => s.ID == lastSyncID); //კიდევ ერთხელ შევამოწმოთ ბოლო სინქრონიზაცია არსებობს თუ არა.
                                     if (lastSync == null) //თუ არ გადმოუტანია ჯიპიაიში, არაფერიც არ უნდა მოხდეს.
                                     {
-                                        T_SyncGPIHSet(sync, sync.GPIHID, Status.Synced, null, DateTime.Now);
+                                        T_SyncINSSet(sync, sync.INSID, Status.Synced, null, DateTime.Now);
                                     }
                                     else //თუ იპოვა დასინქრონიზებული ჩანაწერი მაშინ უნდა შევეცადოთ ჯიპიაის სოფტში წაშლას.
                                     {
-                                        var caseServiceEx = dbGPIH.InsMedicalCaseServiceExes.FirstOrDefault(c => c.ID == lastSync.GPIHID);
+                                        var caseServiceEx = dbINS.InsMedicalCaseServiceExes.FirstOrDefault(c => c.ID == lastSync.INSID);
                                         if (caseServiceEx != null) //თუ ვიპოვეთ ჯიპიაიში დასინქრონიზებული ჩანაწერი, ვნახოთ თუ ClaimManagerID ცარიელია და წავშალოთ. თუ არადა ერორი
                                         {
                                             if (caseServiceEx.ClaimManagerID != null)
-                                                T_SyncGPIHSet(sync, caseServiceEx.ID, Status.Synced, "ClaimManagerID != NULL", DateTime.Now);
+                                                T_SyncINSSet(sync, caseServiceEx.ID, Status.Synced, "ClaimManagerID != NULL", DateTime.Now);
                                             else
                                             {
                                                 if (caseServiceEx.InsMedicalCaseEx != null)
-                                                    dbGPIH.InsMedicalCaseExes.Remove(caseServiceEx.InsMedicalCaseEx);
-                                                dbGPIH.InsMedicalCaseServiceExes.Remove(caseServiceEx);
-                                                dbGPIH.SaveChanges();
-                                                T_SyncGPIHSet(sync, lastSync.GPIHID, Status.Synced, "DELETE", DateTime.Now);
+                                                    dbINS.InsMedicalCaseExes.Remove(caseServiceEx.InsMedicalCaseEx);
+                                                dbINS.InsMedicalCaseServiceExes.Remove(caseServiceEx);
+                                                dbINS.SaveChanges();
+                                                T_SyncINSSet(sync, lastSync.INSID, Status.Synced, "DELETE", DateTime.Now);
                                             }
                                         }
                                         else
                                         {
-                                            T_SyncGPIHSet(sync, sync.GPIHID, Status.Synced, null, DateTime.Now);
+                                            T_SyncINSSet(sync, sync.INSID, Status.Synced, null, DateTime.Now);
                                         }
                                     }
                                 }
@@ -525,16 +525,16 @@ namespace Sync.Win
                     {
                         sync.StatusID = (int)Status.Error;
                         dbCrm.SaveChanges();
-                        LogException(new Exception(string.Format(@"Error while syncing T_SyncGPIH (ID: {0})", sync.ID), ex));
+                        LogException(new Exception(string.Format(@"Error while syncing T_SyncINS (ID: {0})", sync.ID), ex));
                         continue;
                     }
                 }
             }
 
-            EventLog.WriteEntry(string.Format("Done T_SyncGPIH (Count: {0}/{1})", doneCount, toBeSyncedList.Count));
+            EventLog.WriteEntry(string.Format("Done T_SyncINS (Count: {0}/{1})", doneCount, toBeSyncedList.Count));
             if (IsWriteLine)
             {
-                Console.WriteLine("Done T_SyncGPIH (Count: {0}/{1})", doneCount, toBeSyncedList.Count);
+                Console.WriteLine("Done T_SyncINS (Count: {0}/{1})", doneCount, toBeSyncedList.Count);
             }
 
         }
